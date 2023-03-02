@@ -27,7 +27,7 @@ function LoginPage(props) {
         console.log("JWT token", response.data.authToken);
         storeToken(response.data.authToken); 
         authenticateUser();
-        navigate("/"); 
+        navigate("/profile"); 
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
