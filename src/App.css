@@ -21,3 +21,18 @@ body {
     cursor: pointer;
     font-weight: bold;
 }
+
+.deckContainer {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+}
+
+img {
+  height: 20px;
+}
+
+.deckForm {
+  display: flex;
+  flex-direction: column;
+}
