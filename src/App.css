@@ -1,11 +1,19 @@
+/* $color-bg: #EBECF0;
+$color-shadow: #BABECC;
+$color-white: #FFF; */
+
 body {
   margin: 0 auto;
-  background-image: "../public/img1.png";
+  background-color: #EBECF0;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: 1rem;
 }
 
 .Navbar {
-  background: rgb(202,177,210);
-  background: linear-gradient(90deg, rgba(202,177,210,1) 0%, rgba(225,203,226,1) 26%, rgba(251,251,251,1) 57%);
+  background-color: #EBECF0;
+  /* background: rgb(202,177,210); */
+  /* background: linear-gradient(90deg, rgba(202,177,210,1) 0%, rgba(225,203,226,1) 26%, rgba(251,251,251,1) 57%); */
   color: black;
   padding: 15px;
 }
@@ -20,6 +28,64 @@ body {
     border:none;
     cursor: pointer;
     font-weight: bold;
+}
+.SignupPage, .LoginPage {
+  display: flex;
+  justify-content: center;
+}
+.authContainer {
+  width:60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.authContainer h1 {
+  margin-top: 15%;
+  color: #BABECC;
+  text-shadow: 1px 1px 1px #FFF;
+}
+.authForm {
+  padding: 16px;
+}
+
+.authInput, .authBtn {
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    border-radius: 50px;
+    padding: 1rem;
+    background-color: #EBECF0;
+    text-shadow: 1px 1px 0 #FFF;
+    /* margin-right: 1rem/2; */
+    margin: 10px;
+    box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+   -webkit-appearance: none;
+  }
+.authBtn {
+  color:#61677C;
+  font-weight: bold;
+}
+.authInput:focus {
+    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  }
+
+.authBtn:hover {
+    box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+    cursor: pointer;
+  }
+ .authBtn:active {
+    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+
+.authLabel {
+  display: block;
+  margin-bottom: 1rem*1.5;
+  width: 100%;
 }
 
 .deckContainer {

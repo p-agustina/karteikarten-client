@@ -120,7 +120,8 @@ function MyDecks() {
             decks.map((deck) => {
               return (
                 <div>
-                  <p>{deck.name}</p>
+                  <h3>{deck.name}</h3>
+                  <p>{deck.description}</p>
                   <button onClick={() => showForm(`edit-deck-${decks._id}`)}>
                     EDIT DECK
                   </button>

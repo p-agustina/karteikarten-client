@@ -3,7 +3,7 @@
 
 // const API_URL = "http://localhost:5005";
 
-// function DeckForm({onSubmit}) {
+// function DeckForm(props) {
 //     const [name, setName] = useState("");
 //     const [description, setDescription] = useState("");
 
@@ -22,16 +22,15 @@
 //           setDescription("");
 //           onSubmit(response.data);
 //         });
-//         .((err) => console.log(err));
-//         // setName("");
-//         // setDescription("");
-//         // getAllDecks()
+//         setName("");
+//         setDescription("");
+//         getAllDecks()
 //       };
 
 //     return ( 
 //         <div>
 //         <h1>Your Deck</h1>
-//         <form onSubmit={handleSubmit}>
+//         <form onSubmit={props.handleOnSubmit}>
 //           <label>Name</label>
 //           <input
 //             type="text"
