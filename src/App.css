@@ -12,16 +12,9 @@ body {
 
 .Navbar {
   background-color: #EBECF0;
-  /* background: rgb(202,177,210); */
-  /* background: linear-gradient(90deg, rgba(202,177,210,1) 0%, rgba(225,203,226,1) 26%, rgba(251,251,251,1) 57%); */
   color: black;
   padding: 15px;
 }
-
-/* .sign-container {
-  border-bottom: 10px solid black;
-  margin: 0 2px;
-} */
 
 .Navbar button {
     background:none;
@@ -89,9 +82,13 @@ body {
 }
 
 .deckContainer {
-  margin-top: 100px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-around;
+}
+
+.leftContainer, .flashcardsContainer {
+  width: 45%;
 }
 
 img {

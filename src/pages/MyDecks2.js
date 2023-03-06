@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
-import {Link} from "react"
-import axios from "axios";
 import trashcan from "../images/icons8-trash-64.png"
-// import DeckForm from "../components/DeckForm";
+import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
-function MyDecks({decks, setDecks, flashcard, setFlashcards}) {
-  // const [decks, setDecks] = useState([]);
-  // const [flashcards, setFlashcards] = useState([]);
+function MyDecks2({ decks, setDecks, flashcards, setFlashcards }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [translation, setTranslation] = useState("");
   const [germanWord, setGermanWord] = useState("");
   const [show, setShow] = useState(false);
-  // console.log("this is the deck", decks[0]);
 
   const handleName = (e) => setName(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
@@ -33,25 +28,25 @@ function MyDecks({decks, setDecks, flashcard, setFlashcards}) {
     getAllDecks();
   };
 
-  const handleEditDeckSubmit = (e) => {
+  const handleEditDeckSubmit = (e, deckId) => {
     e.preventDefault();
     const requestBody = { name, description, deckId: decks[0]._id };
     axios.post(`${API_URL}/deck/edit-deck`, requestBody).then(() => {});
     setName("");
     setDescription("");
+    getAllDecks();
   };
 
-  const handleAddCardSubmit = (e) => {
+  const handleAddCardSubmit = (e, deckId) => {
     e.preventDefault();
 
-    const requestBody = { translation, germanWord, deckId: decks[0]._id };
-    console.log("este es el id del deck", decks[0]._id);
-
+    const requestBody = { translation, germanWord, deckId: decks[0]._id  };
     axios.post(`${API_URL}/deck/flashcard`, requestBody).then((response) => {
       console.log(response.data);
     });
     setGermanWord("");
     setTranslation("");
+    getAllFlashcards();
   };
 
   const getAllDecks = () => {
@@ -65,7 +60,11 @@ function MyDecks({decks, setDecks, flashcard, setFlashcards}) {
   };
 
   useEffect(() => {
-    getAllDecks();
+    setDecks(decks);
+  }, []);
+  
+  useEffect(() => {
+    setFlashcards(flashcards);
   }, []);
 
   const getAllFlashcards = () => {
@@ -77,11 +76,9 @@ function MyDecks({decks, setDecks, flashcard, setFlashcards}) {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    getAllFlashcards();
-  }, []);
+ 
 
-  function showForm(formType) {
+  function showForm(formType, deckId) {
     setShow(formType);
 
     // if (show === true) {
@@ -90,12 +87,6 @@ function MyDecks({decks, setDecks, flashcard, setFlashcards}) {
     //   setShow(true);
     // }
   }
-
-//  const handleDeleteFlashcard = (e) => {
-//   axios.delete(`${API_URL}/deck/flashcard/${flashcardId}`)
-//   .then(() => {})
-
-//  }
 
   return (
     <div className="deckContainer">
@@ -129,14 +120,15 @@ function MyDecks({decks, setDecks, flashcard, setFlashcards}) {
                 <div>
                   <h3>{deck.name}</h3>
                   <p>{deck.description}</p>
-                  <button onClick={() => showForm(`edit-deck-${decks._id}`)}>
+                  <button className="authBtn" onClick={() => showForm(`edit-deck-${decks._id}`)}>
                     EDIT DECK
                   </button>
-                  <button
+                  <button className="authBtn"
                     onClick={() => showForm(`add-flashcard-${decks._id}`)}
                   >
                     Add flashcard
                   </button>
+                  {/* <Link to="/play"><button>CREATE DECK</button></Link> */}
                 </div>
               );
             })}
@@ -206,4 +198,4 @@ function MyDecks({decks, setDecks, flashcard, setFlashcards}) {
   );
 }
 
-export default MyDecks;
+export default MyDecks2;
