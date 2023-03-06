@@ -3,9 +3,7 @@
 
 // const API_URL = "http://localhost:5005";
 
-// function DeckForm(props) {
-//     const [name, setName] = useState("");
-//     const [description, setDescription] = useState("");
+
 
 //     const handleName = (e) => setName(e.target.value);
 //     const handleDescription = (e) => setDescription(e.target.value);
@@ -53,3 +51,40 @@
 // }
 
 // export default DeckForm;
+
+import React, { useState } from 'react';
+
+function DeckForm(props) {
+  const [name, setName] = useState(props.deck.name);
+  const [description, setDescription] = useState(props.deck.description);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const updatedDeck = {
+      id: props.deck.id,
+      name,
+      description
+    };
+
+    props.onSubmit(updatedDeck);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
+      </label>
+      <br />
+      <label>
+        Description:
+        <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
+      </label>
+      <br />
+      <button type="submit">Save</button>
+    </form>
+  );
+}
+
+export default DeckForm;

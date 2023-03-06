@@ -99,3 +99,9 @@ img {
   display: flex;
   flex-direction: column;
 }
+
+.MyDeck {
+  box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  border-radius: 50px;
+  padding: 20px;
+}

@@ -1,18 +1,18 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+// import React from "react";
+// import { useLocation } from "react-router-dom";
 
-function Play() {
-    const location = useLocation();
-    // const { decks, setDecks, flashcards, setFlashcards } = location.state;
+// function Play() {
+//     const location = useLocation();
+//     // const { decks, setDecks, flashcards, setFlashcards } = location.state;
 
-  return (
-    <div>
+//   return (
+//     <div>
      
-    </div>
-  );
-}
+//     </div>
+//   );
+// }
 
-export default Play;
+// export default Play;
 
     
     
