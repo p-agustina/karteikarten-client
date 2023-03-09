@@ -2,7 +2,7 @@ import trashcan from "./icons8-trash-64.png";
 import axios from "axios";
 import "./FlashcardsList.css";
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function FlashcardsList({ flashcards, setFlashcards, getAllFlashcards }) {
   const handleDelete = (e, flashcardId) => {
