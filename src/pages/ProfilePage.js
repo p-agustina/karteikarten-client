@@ -3,7 +3,7 @@ import MyDecks2 from "./MyDecks2";
 import { AuthContext } from "../context/auth.context";
 import BeatLoader from "react-spinners/BeatLoader";
 
-const API_URL = "process.env.REACT_APP_API_URL";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function ProfilePage({
   decks,
