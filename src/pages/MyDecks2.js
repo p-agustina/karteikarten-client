@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import FlashcardsList from "../components/Flashcards/FlashcardsList";
+import { Link } from "react-router-dom";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "process.env.REACT_APP_API_URL";
 
 function MyDecks2({
   decks,
@@ -43,12 +44,11 @@ function MyDecks2({
     setTranslation("");
     getAllFlashcards();
   };
- 
-   useEffect(() => {
+
+  useEffect(() => {
     setDecks(decks);
     setFlashcards(flashcards);
   }, []);
- 
 
   function showForm(formType, deckId) {
     setShow(formType);
@@ -57,89 +57,104 @@ function MyDecks2({
     // } else {
     //   setShow(true);
     // }
-  };
+  }
 
   return (
     <div className="deckContainer">
       <div className="leftContainer">
-        <div>
-          {user &&
-            decks
-              .filter((deck) => deck._id === user.deck)
-              .map((deck) => {
-                return (
-                  <div>
+        {user &&
+          decks
+            .filter((deck) => deck._id === user.deck)
+            .map((deck) => {
+              console.log(deck);
+              return (
+                <div >
+                <div className="startAndDeck">
+                  <Link to="/play">
+                    <button className="startBtn">START</button>
+                  </Link>
                   <div className="MyDeck">
                     <h3>{deck.name}</h3>
                     <p>{deck.description}</p>
                   </div>
-                    <button
-                      className="authBtn"
-                      onClick={() => showForm(`edit-deck-${decks._id}`)}
-                    >
-                      EDIT DECK
-                    </button>
-                    <button
-                      className="authBtn"
-                      onClick={() => showForm(`add-flashcard-${decks._id}`)}
-                    >
-                      Add flashcard
-                    </button>
-                    {show === `add-flashcard-${decks._id}` && (
-                      <form onSubmit={(e) => handleAddCardSubmit(e, deck._id)}>
-                        <div className="deckForm">
-                          <label>Word in your language</label>
+                  </div>
+                  <button
+                    className="authBtn"
+                    onClick={() => showForm(`edit-deck-${decks._id}`)}
+                  >
+                    edit deck
+                  </button>
+                  <button
+                    className="authBtn"
+                    onClick={() => showForm(`add-flashcard-${decks._id}`)}
+                  >
+                    new flashcard
+                  </button>
+                  {show === `add-flashcard-${decks._id}` && (
+                    <form onSubmit={(e) => handleAddCardSubmit(e, deck._id)}>
+                      <div className="deckForm">
+                        <label>
                           <input
+                            placeholder="word in your language"
+                            className="authInput"
                             type="text"
                             name="translation"
                             value={translation}
                             onChange={handleTranslation}
                           />
-                          <label>Word in German</label>
+                        </label>
+                        <label>
                           <input
+                            className="authInput"
+                            placeholder="word in German"
                             type="text"
                             name="germanWord"
                             value={germanWord}
                             onChange={handleGermanWord}
                           />
-                          <button type="submit">Add</button>
-                        </div>
-                      </form>
-                    )}
-                    {show === `edit-deck-${decks._id}` && (
-                      <form onSubmit={(e) => handleDeckSubmit(e, deck._id)}>
-                        <div className="deckForm">
-                          <label/>
-                          <input
-                            className="authInput"
-                            placeholder={deck.name}
-                            type="text"
-                            name="deckName"
-                            value={name}
-                            onChange={handleName}
-                          />
-                          <label></label>
-                          <input
-                            className="authInput"
-                            placeholder={deck.description}
-                            type="text"
-                            name="description"
-                            value={description}
-                            onChange={handleDescription}
-                          />
-                          <button type="submit">SAVE CHANGES</button>
-                        </div>
-                      </form>
-                    )}
-                  </div>
-                );
-              })}
-        </div>
+                        </label>
+                        <button className="authBtn" type="submit">add</button>
+                      </div>
+                    </form>
+                  )}
+                  {show === `edit-deck-${decks._id}` && (
+                    <form onSubmit={(e) => handleDeckSubmit(e, deck._id)}>
+                      <div className="deckForm">
+                        <label />
+                        <input
+                          className="authInput"
+                          placeholder={deck.name}
+                          type="text"
+                          name="deckName"
+                          value={name}
+                          onChange={handleName}
+                        />
+                        <label></label>
+                        <input
+                          className="authInput"
+                          placeholder={deck.description}
+                          type="text"
+                          name="description"
+                          value={description}
+                          onChange={handleDescription}
+                        />
+                        <button className="authBtn" type="submit">save changes</button>
+                      </div>
+                    </form>
+                  )}
+                </div>
+              );
+            })}
+
         <br />
       </div>
 
       <div className="flashcardsContainer">
-      <FlashcardsList flashcards={flashcards} setFlashcards={setFlashcards}/>
+        <FlashcardsList
+          flashcards={flashcards}
+          setFlashcards={setFlashcards}
+          getAllFlashcards={getAllFlashcards}
+        />
       </div>
     </div>
   );

@@ -1,89 +1,55 @@
-// import { useState } from "react";
-// import axios from "axios";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-// const API_URL = "http://localhost:5005";
+const API_URL = "http://localhost:5005";
 
+function DeckForm({ deck, decks, setDecks, getAllDecks }) {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
+  const handleName = (e) => setName(e.target.value);
+  const handleDescription = (e) => setDescription(e.target.value);
 
-//     const handleName = (e) => setName(e.target.value);
-//     const handleDescription = (e) => setDescription(e.target.value);
-
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-    
-//         const requestBody = { name, description };
-//         axios
-//         .post(`${API_URL}/deck/create-deck`, requestBody)
-//         .then((response) => {
-//           console.log(response.data);
-//           setName("");
-//           setDescription("");
-//           onSubmit(response.data);
-//         });
-//         setName("");
-//         setDescription("");
-//         getAllDecks()
-//       };
-
-//     return ( 
-//         <div>
-//         <h1>Your Deck</h1>
-//         <form onSubmit={props.handleOnSubmit}>
-//           <label>Name</label>
-//           <input
-//             type="text"
-//             name="deckName"
-//             value={name}
-//             onChange={handleName}
-//           />
-//           <label>Description</label>
-//           <input
-//             type="text"
-//             name="description"
-//             value={description}
-//             onChange={handleDescription}
-//           />
-//           <button type="submit">SAVE CHANGES</button>
-//         </form>
-//         {/* <button onClick={showForm}>Add flashcard</button> */}
-//       </div>
-//      );
-// }
-
-// export default DeckForm;
-
-import React, { useState } from 'react';
-
-function DeckForm(props) {
-  const [name, setName] = useState(props.deck.name);
-  const [description, setDescription] = useState(props.deck.description);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const updatedDeck = {
-      id: props.deck.id,
-      name,
-      description
-    };
-
-    props.onSubmit(updatedDeck);
+  const handleDeckSubmit = (e, deckId) => {
+    e.preventDefault();
+    const requestBody = { name, description };
+    axios.post(`${API_URL}/deck/edit/${deckId}`, requestBody).then(() => {});
+    setName("");
+    setDescription("");
+    getAllDecks();
   };
 
+  useEffect(() => {
+    setDecks(decks);
+  }, []);
+ 
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
-      </label>
-      <br />
-      <label>
-        Description:
-        <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
-      </label>
-      <br />
-      <button type="submit">Save</button>
-    </form>
+    <div>
+      <form onSubmit={(e) => handleDeckSubmit(e, deck._id)}>
+        <div className="deckForm">
+          <label />
+          <input
+            className="authInput"
+            placeholder={deck.name}
+            type="text"
+            name="deckName"
+            value={name}
+            onChange={handleName}
+          />
+          <label></label>
+          <input
+            className="authInput"
+            placeholder={deck.description}
+            type="text"
+            name="description"
+            value={description}
+            onChange={handleDescription}
+          />
+          <button type="submit">SAVE CHANGES</button>
+        </div>
+      </form>
+    </div>
   );
 }
 

@@ -4,10 +4,11 @@ import "./FlashcardsList.css";
 
 const API_URL = "http://localhost:5005";
 
-function FlashcardsList({ flashcards, setFlashcards }) {
+function FlashcardsList({ flashcards, setFlashcards, getAllFlashcards }) {
   const handleDelete = (e, flashcardId) => {
     e.preventDefault();
-    axios.delete(`${API_URL}/deck/flashcards/${flashcardId}`).then(() => {});
+    axios.delete(`${API_URL}/deck/flashcards/${flashcardId}`)
+    .then(() => { getAllFlashcards()});
   };
 
   return (
@@ -17,11 +18,11 @@ function FlashcardsList({ flashcards, setFlashcards }) {
         flashcards.map((flashcard) => (
           <form onSubmit={(e) => handleDelete(e, flashcard._id)}>
             <div className="listWordsContainer" key={flashcard._id}>
-              {console.log(flashcard.id)}
+            <div className="listContainer"></div>
               <span className="translation">{flashcard.translation}</span>
               <span className="germanWord">{flashcard.germanWord}</span>
-              <button type="submit">
-                <img src={trashcan} alt="delete button" />
+              <button className="deleteBtn" type="submit">
+                <img className="trashCan" src={trashcan} alt="delete button" />
               </button>
             </div>
           </form>

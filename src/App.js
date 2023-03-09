@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components//Navbar/Navbar";
+import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -22,6 +23,7 @@ function App() {
     axios
       .get(`${API_URL}/deck/decks`)
       .then((decks) => {
+        console.log(decks.data);
         setDecks(decks.data);
       })
       .catch((error) => console.log(error));
@@ -40,6 +42,8 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/*" element={<HomePage/>}/>
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage
@@ -52,7 +56,14 @@ function App() {
           getAllDecks={getAllDecks}
           />}
         />
-        <Route path="/play" element={<Play />} />
+        <Route path="/play" element={<Play 
+          decks={decks}
+          setDecks={setDecks}
+          flashcards={flashcards}
+          setFlashcards={setFlashcards}
+          getAllDecks={getAllDecks}
+          getAllFlashcards={getAllFlashcards}
+        />} />
         <Route path="/my-deck2" element={<MyDecks2 />} />
       </Routes>
     </div>
